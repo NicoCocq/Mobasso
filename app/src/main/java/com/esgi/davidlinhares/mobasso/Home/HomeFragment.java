@@ -79,7 +79,6 @@ public class HomeFragment extends Fragment {
             details.setVisibility(View.GONE);
             detailsEdit.setVisibility(View.VISIBLE);
             saveButton.setVisibility(View.VISIBLE);
-
             return;
         }
 

@@ -15,11 +15,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.esgi.davidlinhares.mobasso.Common.Config;
 import com.esgi.davidlinhares.mobasso.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 
 
 public class DonationFragment extends Fragment {
@@ -54,42 +56,43 @@ public class DonationFragment extends Fragment {
 
     @OnClick(R.id.button_donation)
     void OnDonationClicked() {
-        RunUrl(getString(R.string.donation_link));
+        RunUrl(Config.getDonation_link());
     }
 
     @OnClick(R.id.facebook_image)
     void OnFacebookClicked() {
-        RunUrl(getString(R.string.facebook_link));
+        RunUrl(Config.getFacebook_link());
     }
 
     @OnClick(R.id.twitter_image)
     void OnTwitterClicked() {
-        RunUrl(getString(R.string.twitter_link));
+        RunUrl(Config.getTwitter_link());
     }
 
     @OnClick(R.id.youtube_image)
     void OnYoutubeClicked() {
-        RunUrl(getString(R.string.youtube_link));
+        RunUrl(Config.getYoutube_link());
     }
+
     @OnClick(R.id.instagram_image)
     void OnInstagramClicked() {
-        RunUrl(getString(R.string.instagram_link));
+        RunUrl(Config.getInstagram_link());
     }
 
     private void DisplayButtonUrls() {
-        if(!getString(R.string.donation_link).isEmpty()) {
+        if(!Config.getDonation_link().isEmpty()) {
             btn_donation.setVisibility(View.VISIBLE);
         }
-        if(!getString(R.string.facebook_link).isEmpty()) {
+        if(!Config.getFacebook_link().isEmpty()) {
             btn_facebook.setVisibility(View.VISIBLE);
         }
-        if(!getString(R.string.twitter_link).isEmpty()) {
+        if(!Config.getTwitter_link().isEmpty()) {
             btn_twitter.setVisibility(View.VISIBLE);
         }
-        if(!getString(R.string.youtube_link).isEmpty()) {
+        if(!Config.getYoutube_link().isEmpty()) {
             btn_youtube.setVisibility(View.VISIBLE);
         }
-        if(!getString(R.string.instagram_link).isEmpty()) {
+        if(!Config.getInstagram_link().isEmpty()) {
             btn_instagram.setVisibility(View.VISIBLE);
         }
     }
