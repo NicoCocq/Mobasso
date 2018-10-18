@@ -9,7 +9,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.esgi.davidlinhares.mobasso.MainActivity;
@@ -36,6 +39,15 @@ public class HomeFragment extends Fragment {
 
     @BindView(R.id.home_association_logo)
     ImageView logo;
+    @BindView(R.id.home_association_title)
+    TextView title;
+    @BindView(R.id.home_association_title_edit)
+    EditText titleEdit;
+    @BindView(R.id.home_association_details)
+    TextView details;
+    @BindView(R.id.home_association_details_edit)
+    EditText detailsEdit;
+    @BindView(R.id.home_save) public Button saveButton;
 
     private short touches;
 
@@ -49,6 +61,34 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if(getActivity() instanceof  MainActivity) {
+            setupUi(((MainActivity) getActivity()).isSuperUserActivated());
+        }
+    }
+
+    public void setupUi(boolean superUserActivated) {
+        if(superUserActivated) {
+            title.setVisibility(View.GONE);
+            titleEdit.setVisibility(View.VISIBLE);
+            details.setVisibility(View.GONE);
+            detailsEdit.setVisibility(View.VISIBLE);
+            saveButton.setVisibility(View.VISIBLE);
+
+            return;
+        }
+
+        title.setVisibility(View.VISIBLE);
+        titleEdit.setVisibility(View.GONE);
+        details.setVisibility(View.VISIBLE);
+        detailsEdit.setVisibility(View.GONE);
+        saveButton.setVisibility(View.GONE);
+        logo.setClickable(true);
     }
 
     @Override
@@ -88,5 +128,14 @@ public class HomeFragment extends Fragment {
 
     private void timerFinished() {
         touches = 0;
+    }
+
+    @OnClick(R.id.home_save)
+    void onSaveClicked() {
+        if(getActivity() instanceof  MainActivity) {
+            MainActivity activity = ((MainActivity) getActivity());
+            activity.setSuperUserActivated(false);
+            setupUi(false);
+        }
     }
 }

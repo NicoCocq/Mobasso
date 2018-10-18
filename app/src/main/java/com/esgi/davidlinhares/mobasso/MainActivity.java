@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int STATIC_INTEGER_VALUE = 200;
     @BindView(R.id.bottomNavigationView) public BottomNavigationView bottomNavigationView;
-    @BindView(R.id.main_save) public Button saveButton;
-    private Fragment fragment;
-    private boolean isSuperUserActivated = false;
+    private Fragment fragment = new HomeFragment();
 
     public boolean isSuperUserActivated() {
         return isSuperUserActivated;
     }
+
+    private boolean isSuperUserActivated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +74,6 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
 
         this.isSuperUserActivated = activated;
-        if(isSuperUserActivated) {
-            saveButton.setVisibility(View.VISIBLE);
-            return;
-        }
-
-        saveButton.setVisibility(View.GONE);
     }
 
     @Override
@@ -89,10 +83,5 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         boolean activated = sharedPref.getBoolean(getString(R.string.SUPER_USER_ACTIVATED), false);
         this.setSuperUserActivated(activated);
-    }
-
-    @OnClick(R.id.main_save)
-    void onSaveClicked() {
-        this.setSuperUserActivated(false);
     }
 }
