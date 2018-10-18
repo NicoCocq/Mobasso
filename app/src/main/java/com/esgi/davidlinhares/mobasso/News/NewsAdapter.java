@@ -14,6 +14,7 @@ import com.esgi.davidlinhares.mobasso.R;
 import com.esgi.davidlinhares.mobasso.api.AccountService;
 import com.esgi.davidlinhares.mobasso.api.ApiManager;
 import com.esgi.davidlinhares.mobasso.api.ContainerService;
+import com.google.gson.Gson;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -89,8 +90,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             newsViewHolder.newsTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String json = new Gson().toJson(news, News.class);
                     Intent intent = new Intent(fragment.getActivity(), NewsDetailsActivity.class);
-                    intent.putExtra(fragment.getString(R.string.NEWS_SHARE), news.toString());
+                    intent.putExtra(fragment.getString(R.string.NEWS_SHARE), json);
+                    fragment.startActivity(intent);
                 }
             });
         }

@@ -9,12 +9,10 @@
     <ImageView
         android:id="@+id/news_detail_item_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="200sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@tools:sample/avatars"
-        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintTop_toTopOf="parent"
         android:paddingTop="5sp"
         android:paddingBottom="5sp"
         android:paddingStart="5sp"
@@ -22,38 +20,63 @@
         android:scaleType="centerCrop"
         android:contentDescription="@string/title_news" />
 
-    <TextView
-        android:id="@+id/news_detail_item_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="0sp"
+        android:layout_height="0sp"
         app:layout_constraintTop_toBottomOf="@id/news_detail_item_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="30sp"
-        android:layout_marginEnd="30sp"
-        android:textAlignment="center"
-        android:fontFamily="@font/calibril"
-        android:textStyle="bold"
-        tools:text="texte"
-        android:textSize="32sp"
-        />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:id="@+id/news_detail_item_details"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/news_detail_item_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/news_detail_item_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="30sp"
+                android:layout_marginEnd="30sp"
+                android:textAlignment="center"
+                android:fontFamily="@font/calibril"
+                android:textStyle="bold"
+                tools:text="texte"
+                android:textSize="32sp"
+                />
+
+            <TextView
+                android:id="@+id/news_detail_item_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/news_detail_item_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20sp"
+                android:layout_marginStart="30sp"
+                android:layout_marginEnd="30sp"
+                android:paddingBottom="30sp"
+                android:textAlignment="center"
+                android:fontFamily="@font/calibril"
+                android:textStyle="normal"
+                tools:text="texte"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/news_detail_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/news_detail_item_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20sp"
-        android:layout_marginStart="30sp"
-        android:layout_marginEnd="30sp"
-        android:paddingBottom="30sp"
-        android:textAlignment="center"
-        android:fontFamily="@font/calibril"
-        android:textStyle="normal"
-        tools:text="texte"
-        android:textSize="17sp"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/back"
+        android:background="@color/darkWhite"
+        />
 
 </android.support.constraint.ConstraintLayout>

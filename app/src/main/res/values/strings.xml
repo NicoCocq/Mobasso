@@ -37,4 +37,5 @@
     <string name="unknown_error">Une erreur inconnu est survenue veuillez réessayer plus tard</string>
     <string name="NEWS_UPDATE">NEWS UPDATE</string>
     <string name="NEWS_SHARE">NEWS_SHARE</string>
+    <string name="back">Retour</string>
 </resources>
