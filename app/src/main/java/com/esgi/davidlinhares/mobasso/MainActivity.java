@@ -15,16 +15,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.esgi.davidlinhares.mobasso.Common.Config;
 import com.esgi.davidlinhares.mobasso.Donation.DonationFragment;
 import com.esgi.davidlinhares.mobasso.Home.HomeFragment;
 import com.esgi.davidlinhares.mobasso.News.NewsFragment;
 import com.esgi.davidlinhares.mobasso.api.Account;
 import com.esgi.davidlinhares.mobasso.api.AccountService;
 import com.esgi.davidlinhares.mobasso.api.ApiManager;
+import com.esgi.davidlinhares.mobasso.api.ContainerService;
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        UpdateConfig();
     }
 
     public void setSuperUserActivated(boolean activated) {
@@ -108,6 +114,31 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<Account> call, Throwable t) {
                         System.out.println(call);
+                    }
+                });
+    }
+
+    private void UpdateConfig() {
+        ApiManager.getInstance().getRetrofit().create(ContainerService.class)
+                .downloadConfig(getString(R.string.user_id))
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        try {
+                            String res = new String(response.body().bytes());
+                            Config config = new Gson().fromJson(res,Config.class);
+                            Config.setInstance(config);
+
+                            String test = Config.getAssociation_name();
+                            System.out.println();
+                        }catch(Exception e) {
+                            System.out.println();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        System.out.println();
                     }
                 });
     }

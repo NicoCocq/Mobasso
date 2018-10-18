@@ -13,4 +13,9 @@ import retrofit2.http.Path;
 public interface ContainerService {
     @GET("containers/{id}/download/{name}")
     Call<ResponseBody> download(@Path("id") String id, @Path("name") String imageName);
+
+    @GET("containers/{id}/download/apk_config.txt")
+    Call<ResponseBody> downloadConfig(@Path("id") String id);
+
+
 }
