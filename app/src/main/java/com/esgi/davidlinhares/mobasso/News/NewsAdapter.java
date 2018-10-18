@@ -1,5 +1,6 @@
 package com.esgi.davidlinhares.mobasso.News;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
@@ -64,7 +65,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof NewsViewHolder) {
             final NewsViewHolder newsViewHolder = (NewsViewHolder)holder;
-            News news = this.news.get(position);
+            final News news = this.news.get(position);
             newsViewHolder.newsTitle.setText(news.getTitle());
             newsViewHolder.newsDetails.setText(news.getDetails());
             if(!news.getImage().isEmpty()) {
@@ -74,8 +75,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 Bitmap bmp = BitmapFactory.decodeStream(response.body().byteStream());
-                                newsViewHolder.newsImage.setVisibility(View.VISIBLE);
-                                newsViewHolder.newsImage.setImageBitmap(bmp);
+                                newsViewHolder.setBitmap(bmp);
                             }
 
                             @Override
@@ -86,6 +86,13 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             } else {
                 newsViewHolder.newsImage.setVisibility(View.GONE);
             }
+            newsViewHolder.newsTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(fragment.getActivity(), NewsDetailsActivity.class);
+                    intent.putExtra(fragment.getString(R.string.NEWS_SHARE), news.toString());
+                }
+            });
         }
     }
 
@@ -99,12 +106,19 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ImageView newsImage;
         TextView newsTitle;
         TextView newsDetails;
+        private Bitmap bitmap;
 
         public NewsViewHolder(View itemView) {
             super(itemView);
             newsImage = itemView.findViewById(R.id.news_item_image);
             newsTitle = itemView.findViewById(R.id.news_item_title);
             newsDetails = itemView.findViewById(R.id.news_item_details);
+        }
+
+        public void setBitmap(Bitmap bitmap) {
+            this.bitmap = bitmap;
+            newsImage.setVisibility(View.VISIBLE);
+            newsImage.setImageBitmap(bitmap);
         }
     }
 }

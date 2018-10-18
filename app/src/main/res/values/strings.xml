@@ -11,11 +11,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="donation_link"/>
+    <string name="donation_link" />
     <string name="facebook_link">https://www.facebook.com/</string>
     <string name="twitter_link">test</string>
-    <string name="youtube_link"/>
-    <string name="instagram_link"/>
+    <string name="youtube_link" />
+    <string name="instagram_link" />
 
     <string name="title_news">Actualités</string>
     <string name="password">Mot de passe</string>
@@ -36,4 +36,5 @@
     <string name="send">Envoyer</string>
     <string name="unknown_error">Une erreur inconnu est survenue veuillez réessayer plus tard</string>
     <string name="NEWS_UPDATE">NEWS UPDATE</string>
+    <string name="NEWS_SHARE">NEWS_SHARE</string>
 </resources>
