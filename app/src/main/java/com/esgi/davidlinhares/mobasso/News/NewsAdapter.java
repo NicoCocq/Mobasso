@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.esgi.davidlinhares.mobasso.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -17,9 +19,7 @@ import butterknife.BindView;
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private NewsFragment fragment;
-    private List<News> news = new ArrayList<News>() {
-        
-    };
+    private List<News> news = new ArrayList<>(Arrays.asList(new News("test", "suce"), new News("test", "suce"), new News("test", "suce")));
 
     public NewsAdapter(NewsFragment fragment) {
         this.fragment = fragment;
@@ -28,8 +28,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
-        NewsViewHolder newsViewHolder = new NewsViewHolder(view);
-        return null;
+        return new NewsViewHolder(view);
     }
 
     @Override
@@ -44,10 +43,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return news.size();
     }
 
-    private class NewsViewHolder extends RecyclerView.ViewHolder {
+    public class NewsViewHolder extends RecyclerView.ViewHolder {
 
         ImageView newsImage;
         TextView newsTitle;

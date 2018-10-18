@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".login.LoginActivity" />
+        <activity
+            android:name=".News.NewsCreationActivity"
+            android:label="@string/title_activity_news_creation"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
