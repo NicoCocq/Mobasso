@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.esgi.davidlinhares.mobasso.login.LoginActivity">
+
+        <EditText
+            android:id="@+id/login_email"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:hint="@string/email"
+            android:textAlignment="center"
+            android:inputType="textEmailAddress"
+            android:fontFamily="@font/calibril"
+            />
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/password"
+            android:textAlignment="center"
+            android:inputType="textPassword"
+            android:fontFamily="@font/calibril"
+            />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/login_password"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/mainColor"
+        android:textAlignment="center"
+        android:text="@string/login"
+        android:fontFamily="@font/calibril"
+        />
+
+    <Button
+        android:id="@+id/login_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/darkWhite"
+        android:textAlignment="center"
+        android:text="@string/cancel"
+        android:fontFamily="@font/calibril"
+        />
+
+</android.support.constraint.ConstraintLayout>

@@ -7,4 +7,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_news">Actualités</string>
+    <string name="password">Mot de passe</string>
+    <string name="email">Email</string>
+    <string name="login">Se connecter</string>
+    <string name="cancel">Annuler</string>
+    <string name="missing_fields">Veuillez remplir tous les champs</string>
+    <string name="SUPER_USER_ACTIVATED">SUPER_USER_ACTIVATED</string>
+    <string name="save">Sauvegarder</string>
+    <string name="preference_file_key">preferences</string>
+    <string name="quit_editing_mode">Quitter le mode édition</string>
 </resources>
