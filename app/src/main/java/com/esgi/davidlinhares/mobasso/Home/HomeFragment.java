@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.esgi.davidlinhares.mobasso.Common.Config;
 import com.esgi.davidlinhares.mobasso.MainActivity;
 import com.esgi.davidlinhares.mobasso.R;
 import com.esgi.davidlinhares.mobasso.login.LoginActivity;
@@ -69,6 +70,11 @@ public class HomeFragment extends Fragment {
 
         if(getActivity() instanceof  MainActivity) {
             setupUi(((MainActivity) getActivity()).isSuperUserActivated());
+        }
+
+        if(Config.isIsConfigLoaded()) {
+            title.setText(Config.getInstance().getAssociation_name());
+            details.setText(Config.getInstance().getAssociation_detail());
         }
     }
 

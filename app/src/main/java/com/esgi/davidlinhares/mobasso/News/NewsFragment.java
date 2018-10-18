@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.esgi.davidlinhares.mobasso.Common.Config;
 import com.esgi.davidlinhares.mobasso.MainActivity;
 import com.esgi.davidlinhares.mobasso.R;
 import com.esgi.davidlinhares.mobasso.login.LoginActivity;

@@ -10,6 +10,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isSuperUserActivated = false;
+    private int currentItem = R.id.navigation_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,30 +56,34 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupApiUrl();
+        updateConfig();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.navigation_home:
-                        fragment = new HomeFragment();
-                        break;
-                    case R.id.navigation_news:
-                        fragment = new NewsFragment();
-                        break;
-                    case R.id.navigation_donation:
-                        fragment = new DonationFragment();
-                        break;
-                    default:
-                        return false;
-                }
-                final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.ctnFragment, fragment).commit();
-                return true;
+                currentItem = item.getItemId();
+                return navigationLoad(currentItem);
             }
         });
+    }
 
-        UpdateConfig();
+    private boolean navigationLoad(int itemId) {
+        switch (itemId) {
+            case R.id.navigation_home:
+                fragment = new HomeFragment();
+                break;
+            case R.id.navigation_news:
+                fragment = new NewsFragment();
+                break;
+            case R.id.navigation_donation:
+                fragment = new DonationFragment();
+                break;
+            default:
+                return false;
+        }
+        final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.ctnFragment, fragment).commit();
+        return true;
     }
 
     public void setSuperUserActivated(boolean activated) {
@@ -118,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void UpdateConfig() {
+    private void updateConfig() {
         ApiManager.getInstance().getRetrofit().create(ContainerService.class)
                 .downloadConfig(getString(R.string.user_id))
                 .enqueue(new Callback<ResponseBody>() {
@@ -126,11 +132,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
                             String res = new String(response.body().bytes());
-                            Config config = new Gson().fromJson(res,Config.class);
-                            Config.setInstance(config);
 
-                            String test = Config.getAssociation_name();
-                            System.out.println();
+                            Config.setInstance(stringToConfig(res));
+
+                            saveConfig(res);
+                            navigationLoad(currentItem);
                         }catch(Exception e) {
                             System.out.println();
                         }
@@ -141,5 +147,27 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println();
                     }
                 });
+
+        SharedPreferences sharedPreferences =
+                getSharedPreferences(getString(R.string.preference_file_key), MODE_PRIVATE);
+        String config = sharedPreferences.getString(getString(R.string.config_file), "");
+        if(config.isEmpty())
+            return;
+
+        stringToConfig(config);
+        navigationLoad(currentItem);
+    }
+
+    private void saveConfig(String conf) {
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(getString(R.string.config_file), conf);
+        editor.apply();
+        editor.commit();
+    }
+
+    private Config stringToConfig(String conf) {
+        Config config = new Gson().fromJson(conf, Config.class);
+        return config;
     }
 }

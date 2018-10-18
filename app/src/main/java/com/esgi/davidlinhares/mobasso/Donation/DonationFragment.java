@@ -56,43 +56,43 @@ public class DonationFragment extends Fragment {
 
     @OnClick(R.id.button_donation)
     void OnDonationClicked() {
-        RunUrl(Config.getDonation_link());
+        RunUrl(Config.getInstance().getDonation_link());
     }
 
     @OnClick(R.id.facebook_image)
     void OnFacebookClicked() {
-        RunUrl(Config.getFacebook_link());
+        RunUrl(Config.getInstance().getFacebook_link());
     }
 
     @OnClick(R.id.twitter_image)
     void OnTwitterClicked() {
-        RunUrl(Config.getTwitter_link());
+        RunUrl(Config.getInstance().getTwitter_link());
     }
 
     @OnClick(R.id.youtube_image)
     void OnYoutubeClicked() {
-        RunUrl(Config.getYoutube_link());
+        RunUrl(Config.getInstance().getYoutube_link());
     }
 
     @OnClick(R.id.instagram_image)
     void OnInstagramClicked() {
-        RunUrl(Config.getInstagram_link());
+        RunUrl(Config.getInstance().getInstagram_link());
     }
 
     private void DisplayButtonUrls() {
-        if(!Config.getDonation_link().isEmpty()) {
+        if(!Config.getInstance().getDonation_link().isEmpty()) {
             btn_donation.setVisibility(View.VISIBLE);
         }
-        if(!Config.getFacebook_link().isEmpty()) {
+        if(!Config.getInstance().getFacebook_link().isEmpty()) {
             btn_facebook.setVisibility(View.VISIBLE);
         }
-        if(!Config.getTwitter_link().isEmpty()) {
+        if(!Config.getInstance().getTwitter_link().isEmpty()) {
             btn_twitter.setVisibility(View.VISIBLE);
         }
-        if(!Config.getYoutube_link().isEmpty()) {
+        if(!Config.getInstance().getYoutube_link().isEmpty()) {
             btn_youtube.setVisibility(View.VISIBLE);
         }
-        if(!Config.getInstagram_link().isEmpty()) {
+        if(!Config.getInstance().getInstagram_link().isEmpty()) {
             btn_instagram.setVisibility(View.VISIBLE);
         }
     }
