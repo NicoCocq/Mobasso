@@ -17,11 +17,14 @@ import android.widget.Toast;
 
 import com.esgi.davidlinhares.mobasso.MainActivity;
 import com.esgi.davidlinhares.mobasso.R;
+import com.esgi.davidlinhares.mobasso.login.LoginActivity;
 
 import butterknife.BindFloat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.esgi.davidlinhares.mobasso.MainActivity.STATIC_INTEGER_VALUE;
 
 public class NewsFragment extends Fragment {
 
@@ -53,6 +56,7 @@ public class NewsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        newsAdapter.notifyDataSetChanged();
         if(getActivity() instanceof MainActivity) {
             setupUi(((MainActivity) getActivity()).isSuperUserActivated());
         }
@@ -85,6 +89,6 @@ public class NewsFragment extends Fragment {
 
     @OnClick(R.id.add_news_icon)
     void onAddNewsClicked() {
-        startActivity(new Intent(getActivity(), NewsCreationActivity.class));
+        startActivityForResult(new Intent(this.getActivity(), NewsCreationActivity.class), STATIC_INTEGER_VALUE);
     }
 }

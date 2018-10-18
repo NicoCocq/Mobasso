@@ -18,10 +18,17 @@ import android.widget.TextView;
 import com.esgi.davidlinhares.mobasso.Donation.DonationFragment;
 import com.esgi.davidlinhares.mobasso.Home.HomeFragment;
 import com.esgi.davidlinhares.mobasso.News.NewsFragment;
+import com.esgi.davidlinhares.mobasso.api.Account;
+import com.esgi.davidlinhares.mobasso.api.AccountService;
+import com.esgi.davidlinhares.mobasso.api.ApiManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+        setupApiUrl();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -84,5 +93,22 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         boolean activated = sharedPref.getBoolean(getString(R.string.SUPER_USER_ACTIVATED), false);
         this.setSuperUserActivated(activated);
+    }
+
+    private void setupApiUrl() {
+        ApiManager.getInstance().setApiUrl(getString(R.string.URL_api));
+        AccountService service = ApiManager.getInstance().getRetrofit().create(AccountService.class);
+        service.account("1")
+                .enqueue(new Callback<Account>() {
+                    @Override
+                    public void onResponse(Call<Account> call, Response<Account> response) {
+                        System.out.println(response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<Account> call, Throwable t) {
+                        System.out.println(call);
+                    }
+                });
     }
 }

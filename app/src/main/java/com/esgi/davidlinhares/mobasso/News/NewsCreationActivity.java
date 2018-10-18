@@ -9,10 +9,16 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.esgi.davidlinhares.mobasso.R;
+import com.esgi.davidlinhares.mobasso.api.AccountService;
+import com.esgi.davidlinhares.mobasso.api.ApiManager;
+import com.esgi.davidlinhares.mobasso.api.NewsInformations;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewsCreationActivity extends AppCompatActivity {
 
@@ -39,8 +45,34 @@ public class NewsCreationActivity extends AppCompatActivity {
 
         if(title.isEmpty() || details.isEmpty()) {
             Toast.makeText(this, R.string.missing_fields, Toast.LENGTH_SHORT).show();
+            return;
         }
-        //TODO send to api
+
+        String id = getString(R.string.user_id);
+
+        ApiManager.getInstance().getRetrofit().create(AccountService.class)
+                .createNews(id, new NewsInformations(title, details, id))
+                .enqueue(new Callback<News>() {
+                    @Override
+                    public void onResponse(Call<News> call, Response<News> response) {
+                        if(response.code() == 200) {
+                            Intent resultIntent = new Intent();
+                            resultIntent.putExtra(getString(R.string.NEWS_UPDATE), true);
+                            finish();
+                        }
+                        else
+                            failedToSendNews();
+                    }
+
+                    @Override
+                    public void onFailure(Call<News> call, Throwable t) {
+
+                    }
+                });
+    }
+
+    private void failedToSendNews() {
+        Toast.makeText(this, R.string.unknown_error, Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.article_cancel)
