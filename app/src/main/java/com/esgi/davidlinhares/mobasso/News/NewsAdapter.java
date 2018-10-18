@@ -1,5 +1,7 @@
 package com.esgi.davidlinhares.mobasso.News;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,46 +10,91 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.esgi.davidlinhares.mobasso.R;
+import com.esgi.davidlinhares.mobasso.api.AccountService;
+import com.esgi.davidlinhares.mobasso.api.ApiManager;
+import com.esgi.davidlinhares.mobasso.api.ContainerService;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private NewsFragment fragment;
-    private List<News> news = new ArrayList<News>() {
-        
-    };
+    private List<News> news = new ArrayList<>();
 
     public NewsAdapter(NewsFragment fragment) {
         this.fragment = fragment;
+        retrieveNews();
+    }
+
+    private void retrieveNews() {
+        ApiManager.getInstance().getRetrofit().create(AccountService.class)
+                .getNews(fragment.getString(R.string.user_id))
+                .enqueue(new Callback<List<News>>() {
+                    @Override
+                    public void onResponse(Call<List<News>> call, Response<List<News>> response) {
+                        news = response.body();
+                        Collections.reverse(news);
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<News>> call, Throwable t) {
+
+                    }
+                });
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
-        NewsViewHolder newsViewHolder = new NewsViewHolder(view);
-        return null;
+        return new NewsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof NewsViewHolder) {
-            NewsViewHolder newsViewHolder = (NewsViewHolder)holder;
+            final NewsViewHolder newsViewHolder = (NewsViewHolder)holder;
             News news = this.news.get(position);
             newsViewHolder.newsTitle.setText(news.getTitle());
             newsViewHolder.newsDetails.setText(news.getDetails());
+            if(!news.getImage().isEmpty()) {
+                ApiManager.getInstance().getRetrofit().create(ContainerService.class)
+                        .download(fragment.getString(R.string.user_id), news.getImage())
+                        .enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                Bitmap bmp = BitmapFactory.decodeStream(response.body().byteStream());
+                                newsViewHolder.newsImage.setVisibility(View.VISIBLE);
+                                newsViewHolder.newsImage.setImageBitmap(bmp);
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                            }
+                        });
+            } else {
+                newsViewHolder.newsImage.setVisibility(View.GONE);
+            }
         }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return news.size();
     }
 
-    private class NewsViewHolder extends RecyclerView.ViewHolder {
+    public class NewsViewHolder extends RecyclerView.ViewHolder {
 
         ImageView newsImage;
         TextView newsTitle;

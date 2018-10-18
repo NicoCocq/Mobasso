@@ -2,10 +2,11 @@
     <string name="app_name">MobAsso</string>
     <string name="title_home">Accueil</string>
     <string name="title_donation">Donation</string>
-    <string name="title_news">Actualités</string>
     <string name="title_support">Soutenez-nous</string>
 
     <string name="URL_error">URL invalide</string>
+    <string name="URL_api">http://10.33.2.250:3000/api/</string>
+    <string name="user_id">1</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -16,4 +17,23 @@
     <string name="youtube_link"/>
     <string name="instagram_link"/>
 
+    <string name="title_news">Actualités</string>
+    <string name="password">Mot de passe</string>
+    <string name="email">Email</string>
+    <string name="login">Se connecter</string>
+    <string name="cancel">Annuler</string>
+    <string name="missing_fields">Veuillez remplir tous les champs</string>
+    <string name="SUPER_USER_ACTIVATED">SUPER_USER_ACTIVATED</string>
+    <string name="save">Sauvegarder</string>
+    <string name="preference_file_key">preferences</string>
+    <string name="quit_editing_mode">Quitter le mode édition</string>
+    <string name="association_name">MobAsso</string>
+    <string name="association_detail">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l\'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n\'a pas fait que survivre cinq siècles, mais s\'est aussi adapté à la bureautique informatique, sans que son contenu n\'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</string>
+    <string name="title_activity_news_creation">NewsCreationActivity</string>
+    <string name="article_title_create">Titre de l\'article</string>
+    <string name="article_create_content">Contenu</string>
+    <string name="image">Image</string>
+    <string name="send">Envoyer</string>
+    <string name="unknown_error">Une erreur inconnu est survenue veuillez réessayer plus tard</string>
+    <string name="NEWS_UPDATE">NEWS UPDATE</string>
 </resources>
