@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">MobAsso</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Accueil</string>
+    <string name="title_donation">Donation</string>
+    <string name="title_news">Actualités</string>
+    <string name="title_support">Soutenez-nous</string>
+
+    <string name="URL_error">URL invalide</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_news">Actualités</string>
+
+    <string name="donation_link"/>
+    <string name="facebook_link">https://www.facebook.com/</string>
+    <string name="twitter_link">test</string>
+    <string name="youtube_link"/>
+    <string name="instagram_link"/>
+
 </resources>

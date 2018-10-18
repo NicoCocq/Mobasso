@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.esgi.davidlinhares.mobasso.Donation.DonationFragment;
 import com.esgi.davidlinhares.mobasso.Home.HomeFragment;
@@ -35,10 +34,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_home:
                         fragment = new HomeFragment();
                         break;
-                    case R.id.navigation_dashboard:
+                    case R.id.navigation_news:
                         fragment = new NewsFragment();
                         break;
-                    case R.id.navigation_notifications:
+                    case R.id.navigation_donation:
+                        fragment = new DonationFragment();
                         break;
                     default:
                         return false;
