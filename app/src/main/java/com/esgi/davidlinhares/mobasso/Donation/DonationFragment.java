@@ -96,7 +96,7 @@ public class DonationFragment extends Fragment {
 
     /**
      * Opens the android browser with the URL provided
-     * @param url
+     * @param url : url to run
      */
     private void RunUrl(String url) {
         try {

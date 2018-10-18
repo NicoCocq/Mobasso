@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white">
     <TextView
         android:id="@+id/actuality_banner_view"
@@ -15,6 +14,7 @@
         android:textSize="35sp"
         android:gravity="center_vertical"
         android:paddingStart="15sp"
+        android:paddingEnd="15sp"
         app:layout_constraintHeight_percent="0.15"
         android:background="@color/darkWhite"
         android:text="@string/title_support"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Donation"
+        android:text="@string/title_donation"
         android:textColor="@color/white"
         android:layout_marginTop="25sp"
         app:layout_constraintTop_toBottomOf="@id/donation_image"
