@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
     <View
         android:id="@+id/home_banner_view"
         android:layout_width="0dp"
@@ -12,13 +13,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHeight_percent="0.25"
-        android:background="@color/colorAccent"
+        android:background="@color/mainColor"
         />
 
     <ImageView
         android:id="@+id/home_association_logo"
-        android:layout_width="50sp"
-        android:layout_height="50sp"
+        android:layout_width="70sp"
+        android:layout_height="70sp"
         tools:src="@tools:sample/avatars"
         app:layout_constraintTop_toTopOf="@+id/home_banner_view"
         app:layout_constraintRight_toRightOf="@+id/home_banner_view"
@@ -45,8 +46,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30sp"
                 android:textAlignment="center"
-                android:textSize="30sp"
-                android:fontFamily="casual"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/calibril"
                 tools:text="MobAsso"
                 />
 
@@ -56,9 +58,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30sp"
                 android:minLines="1"
+                android:textSize="17sp"
                 android:paddingStart="30sp"
                 android:paddingEnd="30sp"
                 android:paddingBottom="30sp"
+                android:fontFamily="@font/calibril"
                 tools:text="Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker." />
         </LinearLayout>
     </ScrollView>

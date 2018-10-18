@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HomeFragment();
                         break;
                     case R.id.navigation_dashboard:
+                        fragment = new NewsFragment();
                         break;
                     case R.id.navigation_notifications:
                         break;

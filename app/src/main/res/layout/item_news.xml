@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/news_item_image"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            tools:src="@tools:sample/avatars"
+            android:paddingTop="5sp"
+            android:paddingBottom="5sp"
+            android:paddingStart="5sp"
+            android:paddingEnd="5sp"
+            android:scaleType="fitCenter"
+            />
+        <TextView
+            android:id="@+id/news_item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:textAlignment="center"
+            android:fontFamily="@font/calibril"
+            android:textStyle="bold"
+            android:maxLines="1"
+            tools:text="texte"
+            />
+        <TextView
+            android:id="@+id/news_item_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:layout_marginBottom="30sp"
+            android:textAlignment="center"
+            android:fontFamily="@font/calibril"
+            android:textStyle="normal"
+            android:maxLines="3"
+            tools:text="texte" />
+
+        <view
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:layout_marginBottom="5sp"
+            android:background="@color/mainColor"
+            />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
