@@ -5,7 +5,7 @@
     <string name="title_support">Soutenez-nous</string>
 
     <string name="URL_error">URL invalide</string>
-    <string name="URL_api">http://192.168.1.20:3000/api/</string>
+    <string name="URL_api">http://10.33.2.250:3000/api/</string>
     <string name="user_id">1</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -39,4 +39,5 @@
     <string name="NEWS_SHARE">NEWS_SHARE</string>
     <string name="back">Retour</string>
     <string name="config_file">config_file</string>
+    <string name="bad_credentials">Login ou mot de passe incorrect</string>
 </resources>

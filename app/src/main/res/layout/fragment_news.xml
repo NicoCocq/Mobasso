@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/quit_editing_mode"
-        android:background="@color/colorPrimary"
+        android:background="@color/mainColor"
         android:visibility="gone"
         />
 

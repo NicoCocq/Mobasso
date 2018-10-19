@@ -1,11 +1,13 @@
 package com.esgi.davidlinhares.mobasso.Home;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,23 +21,17 @@ import com.esgi.davidlinhares.mobasso.Common.Config;
 import com.esgi.davidlinhares.mobasso.MainActivity;
 import com.esgi.davidlinhares.mobasso.R;
 import com.esgi.davidlinhares.mobasso.login.LoginActivity;
+import com.google.gson.Gson;
 
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 import static com.esgi.davidlinhares.mobasso.MainActivity.STATIC_INTEGER_VALUE;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
 
     @BindView(R.id.home_association_logo)
@@ -75,6 +71,8 @@ public class HomeFragment extends Fragment {
         if(Config.isIsConfigLoaded()) {
             title.setText(Config.getInstance().getAssociation_name());
             details.setText(Config.getInstance().getAssociation_detail());
+            titleEdit.setText(Config.getInstance().getAssociation_name());
+            detailsEdit.setText(Config.getInstance().getAssociation_detail());
         }
     }
 
@@ -129,6 +127,26 @@ public class HomeFragment extends Fragment {
                 touches = 0;
             }
         }
+    }
+
+    @OnTextChanged(value = R.id.home_association_title_edit, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    public void onTitleChanged(Editable s) {
+        Config.getInstance().setAssociation_name(s.toString());
+        String json = new Gson().toJson(Config.getInstance(), Config.class);
+        Config.getInstance().saveConfig(json, getContext());
+
+        if(title.getText() != s.toString())
+            title.setText(s.toString());
+    }
+
+    @OnTextChanged(value = R.id.home_association_details_edit, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    public void onDetailChanged(Editable s) {
+        Config.getInstance().setAssociation_detail(s.toString());
+        String json = new Gson().toJson(Config.getInstance(), Config.class);
+        Config.getInstance().saveConfig(json, getContext());
+
+        if(details.getText() != s.toString())
+            details.setText(s.toString());
     }
 
     private void timerFinished() {

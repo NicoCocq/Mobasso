@@ -1,14 +1,30 @@
 package com.esgi.davidlinhares.mobasso.Common;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.esgi.davidlinhares.mobasso.R;
+import com.esgi.davidlinhares.mobasso.api.ApiManager;
+import com.esgi.davidlinhares.mobasso.api.ContainerService;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static android.content.Context.MODE_PRIVATE;
 
 final public class Config {
     private static Config instance = null;
 
     @SerializedName("title")
-    private String association_name = "MobAsso";
+    private String association_name;
     @SerializedName("description")
-    private String association_detail = "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l\\'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n\\'a pas fait que survivre cinq siècles, mais s\\'est aussi adapté à la bureautique informatique, sans que son contenu n\\'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.";
+    private String association_detail;
     @SerializedName("primaryColor")
     private String main_color = "";
     @SerializedName("donation")
@@ -23,6 +39,37 @@ final public class Config {
     private String instagram_link = "";
     private static boolean isConfigLoaded = false;
 
+    public void setAssociation_name(String association_name) {
+        this.association_name = association_name;
+    }
+
+    public void setAssociation_detail(String association_detail) {
+        this.association_detail = association_detail;
+    }
+
+    public void setMain_color(String main_color) {
+        this.main_color = main_color;
+    }
+
+    public void setDonation_link(String donation_link) {
+        this.donation_link = donation_link;
+    }
+
+    public void setFacebook_link(String facebook_link) {
+        this.facebook_link = facebook_link;
+    }
+
+    public void setTwitter_link(String twitter_link) {
+        this.twitter_link = twitter_link;
+    }
+
+    public void setYoutube_link(String youtube_link) {
+        this.youtube_link = youtube_link;
+    }
+
+    public void setInstagram_link(String instagram_link) {
+        this.instagram_link = instagram_link;
+    }
 
     private Config(String association_name, String association_detail, String main_color, String donation_link, String facebook_link, String twitter_link, String youtube_link, String instagram_link) {
         this.association_name = association_name;
@@ -78,5 +125,13 @@ final public class Config {
 
     public static boolean isIsConfigLoaded() {
         return isConfigLoaded;
+    }
+
+    public void saveConfig(String conf, Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.preference_file_key), MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(context.getString(R.string.config_file), conf);
+        editor.apply();
+        editor.commit();
     }
 }

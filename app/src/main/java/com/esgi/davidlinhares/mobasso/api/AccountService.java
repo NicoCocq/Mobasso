@@ -1,9 +1,11 @@
 package com.esgi.davidlinhares.mobasso.api;
 
 import com.esgi.davidlinhares.mobasso.News.News;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -21,5 +23,7 @@ public interface AccountService {
     Call<List<News>> getNews(@Path("id") String id);
     @POST("accounts/{id}/news")
     Call<News> createNews(@Path("id") String id, @Body NewsInformations body);
+    @POST("accounts/login")
+    Call<ResponseBody> login(@Body Login body);
 }
 

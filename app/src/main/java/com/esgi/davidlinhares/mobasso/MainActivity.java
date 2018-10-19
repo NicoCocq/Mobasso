@@ -134,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
                             String res = new String(response.body().bytes());
 
                             Config.setInstance(stringToConfig(res));
+                            Config.getInstance().saveConfig(res, fragment.getContext());
 
-                            saveConfig(res);
                             navigationLoad(currentItem);
                         }catch(Exception e) {
                             System.out.println();
@@ -158,16 +158,7 @@ public class MainActivity extends AppCompatActivity {
         navigationLoad(currentItem);
     }
 
-    private void saveConfig(String conf) {
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(getString(R.string.config_file), conf);
-        editor.apply();
-        editor.commit();
-    }
-
     private Config stringToConfig(String conf) {
-        Config config = new Gson().fromJson(conf, Config.class);
-        return config;
+        return new Gson().fromJson(conf, Config.class);
     }
 }
